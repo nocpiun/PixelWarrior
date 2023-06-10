@@ -2,6 +2,7 @@ const path = require("path");
 
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: "./src/index.ts",
@@ -30,13 +31,27 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: path.join(__dirname, "public"), to: path.join(__dirname, "build") }
+            ]
+        })
     ],
     optimization: {
         minimize: true,
         minimizer: [new TerserWebpackPlugin({
             extractComments: false
         })]
+    },
+    devServer: {
+        static: {
+            directory: path.join(__dirname, "build")
+        },
+        compress: true,
+        hot: true,
+        open: true,
+        port: 5000,
     },
     resolve: {
         extensions: [".ts", ".js", ".json"]

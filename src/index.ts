@@ -1,6 +1,4 @@
-// The entry file
-// Code something here...
+import * as PIXI from "pixijs";
+import Main from "./Main";
 
-export function add(a: number, b: number): number {
-    return a + b;
-}
+new Main(new PIXI.Application());
