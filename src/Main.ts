@@ -15,9 +15,7 @@ export default class Main {
     }
 
     private init(): void {
-        this.app.view.width = window.innerWidth;
-        this.app.view.height = window.innerHeight;
-        this.app.renderer.resolution = window.devicePixelRatio || 1;
+        this.app.renderer.resize(window.innerWidth, window.innerHeight);
 
         document.body.appendChild(this.app.view as HTMLCanvasElement);
 
