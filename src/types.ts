@@ -12,11 +12,12 @@ export interface ComponentOption {
 }
 
 export interface LabelOption extends ComponentOption {
-    style: TextStyleType
+    style?: TextStyleType
 }
 
 export interface ButtonStyle {
     backgroundColor: number
+    hoverBackgroundColor?: number
 }
 
 export interface ButtonOption extends ComponentOption {
@@ -24,6 +25,6 @@ export interface ButtonOption extends ComponentOption {
     height: number
     text: string
     textStyle: TextStyleType
-    style: ButtonStyle
+    style?: ButtonStyle
     onClick?: (e: PIXI.FederatedPointerEvent) => any
 }

@@ -1,0 +1,18 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: Minecraft AE;
+    src: url("../assets/fonts/Minecraft\ AE.woff") format(woff);
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    /* It is quite odd that if there's not the following declaration, the font won't be available in the canvas. */
+    /* So DO NOT DELETE THIS LINE */
+    font-family: Minecraft AE;
+}

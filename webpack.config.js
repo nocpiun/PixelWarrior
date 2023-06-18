@@ -17,17 +17,28 @@ module.exports = {
             {
                 test: /\.(js|mjs|ts)$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader"
-                }
+                use: "babel-loader"
             },
             {
                 test: /\.ts$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: "ts-loader"
-                }
+                use: "ts-loader"
             },
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.(png|ico|jpg)$/,
+                exclude: /node_modules/,
+                use: "file-loader"
+            },
+            {
+                test: /\.(ttf|otf|woff|woff2)/,
+                type: "asset/resource",
+                dependency: { not: ["url"] }
+            }
         ]
     },
     plugins: [

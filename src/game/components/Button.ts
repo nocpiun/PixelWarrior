@@ -6,7 +6,8 @@ import type { ButtonOption } from "../../types";
 
 export default class Button extends Component<ButtonOption> {
     private option: ButtonOption;
-    private background = new PIXI.Graphics();
+    public background = new PIXI.Graphics();
+    public textObject: PIXI.Text;
 
     public constructor(option?: ButtonOption) {
         super(option);
@@ -16,10 +17,11 @@ export default class Button extends Component<ButtonOption> {
         this.interactive = true;
         this.on("click", (e) => {
             if(option.onClick) option.onClick(e);
+            this.cursor = "default";
         });
         this.on("mouseenter", () => {
+            if(option.style.hoverBackgroundColor) this.setBackgroundColor(option.style.hoverBackgroundColor);
             this.cursor = "pointer";
-            // this.setBackgroundColor(option.style.backgroundColor);
         });
         this.on("mouseleave", () => {
             this.cursor = "default";
@@ -29,14 +31,18 @@ export default class Button extends Component<ButtonOption> {
         this.setBackgroundColor(option.style.backgroundColor);
         this.addChild(this.background);
 
-        var text = new PIXI.Text(option.text, option.textStyle);
-        text.x = option.x + (option.width / 2) - (text.width / 2);
-        text.y = option.y + (option.height / 2) - (text.height / 2);
-        this.addChild(text);
+        this.textObject = new PIXI.Text(option.text, option.textStyle);
+        this.textObject.x = option.x + (option.width / 2) - (this.textObject.width / 2);
+        this.textObject.y = option.y + (option.height / 2) - (this.textObject.height / 2);
+        this.addChild(this.textObject);
     }
 
-    private setBackgroundColor(color: number): void {
+    public setBackgroundColor(color: number): void {
         this.background.beginFill(color);
         this.background.drawRect(this.option.x, this.option.y, this.option.width, this.option.height);
+    }
+
+    public setText(text: string): void {
+        this.textObject.text = text;
     }
 }

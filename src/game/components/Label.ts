@@ -5,7 +5,7 @@ import Component from "./Component";
 import type { LabelOption } from "../../types";
 
 export default class Label extends Component<LabelOption> {
-    private textObject: PIXI.Text;
+    public textObject: PIXI.Text;
 
     public constructor(text: string, option?: LabelOption) {
         super(option);
