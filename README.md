@@ -1,3 +1,3 @@
-# Typescript Template
+# Pixel Warrior
 
-Use this template to create a Typescript project.
+> This project hasn't completed yet...
