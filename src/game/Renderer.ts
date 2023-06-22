@@ -21,16 +21,16 @@ export default class Renderer {
     private testbtn: Button;
     private menus: Menu[];
 
-    private currentMenu: MenuType;
+    public currentMenu: MenuType;
 
     public constructor(app: PIXI.Application) {
         this.app = app;
         this.menus = [
-            new LoadingMenu(), // 0
+            new LoadingMenu(this), // 0
             new MainMenu(this), // 1
-            new SavesMenu(), // 2
-            new SettingsMenu(), // 3
-            new AboutMenu(), // 4
+            new SavesMenu(this), // 2
+            new SettingsMenu(this), // 3
+            new AboutMenu(this), // 4
             new InGameMenu(), // 5
         ];
 
@@ -38,6 +38,8 @@ export default class Renderer {
     }
 
     private initObjects(): void {
+        this.app.stage.removeChild(this.fpsText);
+
         // FPS Text
         this.fpsText = new Label("", {
             x: 15,
@@ -50,10 +52,16 @@ export default class Renderer {
         this.fpsText.appendTo(this.app.stage);
     }
 
-    public setMenu(menu: MenuType): void {
+    public setMenu(menu: MenuType, ...args: any[]): void {
         this.currentMenu = menu;
         this.removeAllMenu();
-        this.menus[this.currentMenu].appendTo(this.app.stage);
+
+        var menuContainer = this.menus[this.currentMenu];
+        menuContainer.removeChildren();
+        menuContainer.init(...args);
+        menuContainer.appendTo(this.app.stage);
+
+        this.initObjects();
     }
 
     public removeAllMenu(): void {
@@ -63,7 +71,7 @@ export default class Renderer {
     }
 
     public update(delta: number): void {
-        this.fpsText.setText("FPS: "+ this.app.ticker.FPS.toFixed(0));
         this.menus[this.currentMenu].update(delta);
+        this.fpsText.setText(`FPS: ${this.app.ticker.FPS.toFixed(1)} / ${this.app.ticker.maxFPS.toFixed(1)}`);
     }
 }

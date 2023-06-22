@@ -8,6 +8,7 @@ export default abstract class Menu extends PIXI.Container {
         this.height = window.innerHeight;
     }
 
+    public abstract init(...args: any[]): void;
     public abstract update(delta?: number): void;
 
     public appendTo(container: PIXI.Container): void {

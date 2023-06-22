@@ -13,6 +13,7 @@ export default class Button extends Component<ButtonOption> {
         super(option);
 
         this.option = option;
+        if(!this.option.style.borderColor) this.option.style.borderColor = this.option.style.backgroundColor;
 
         this.interactive = true;
         this.on("click", (e) => {
@@ -21,14 +22,17 @@ export default class Button extends Component<ButtonOption> {
         });
         this.on("mouseenter", () => {
             if(option.style.hoverBackgroundColor) this.setBackgroundColor(option.style.hoverBackgroundColor);
+            if(option.style.hoverBorderColor) this.setBorderColor(option.style.hoverBorderColor);
             this.cursor = "pointer";
         });
         this.on("mouseleave", () => {
-            this.cursor = "default";
             this.setBackgroundColor(option.style.backgroundColor);
+            this.setBorderColor(option.style.borderColor);
+            this.cursor = "default";
         });
         
         this.setBackgroundColor(option.style.backgroundColor);
+        this.setBorderColor(option.style.borderColor);
         this.addChild(this.background);
 
         this.textObject = new PIXI.Text(option.text, option.textStyle);
@@ -39,6 +43,11 @@ export default class Button extends Component<ButtonOption> {
 
     public setBackgroundColor(color: number): void {
         this.background.beginFill(color);
+        this.background.drawRect(this.option.x, this.option.y, this.option.width, this.option.height);
+    }
+
+    public setBorderColor(color: number): void {
+        this.background.lineStyle(2, color);
         this.background.drawRect(this.option.x, this.option.y, this.option.width, this.option.height);
     }
 

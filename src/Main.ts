@@ -3,6 +3,7 @@ import { Loader } from "@pixi/loaders";
 
 import Renderer from "./game/Renderer";
 import { MenuType } from "./types";
+import Utils from "./utils/Utils";
 
 import MinecraftAEFont from "./assets/fonts/Minecraft AE.woff";
 
@@ -27,9 +28,10 @@ export default class Main {
         // Prevent rightclick contextmenu
         // (this.app.view as HTMLCanvasElement).addEventListener("contextmenu", (e) => e.preventDefault());
 
+        this.renderer = new Renderer(this.app);
+        this.renderer.setMenu(MenuType.LOADING);
+
         this.loader.load(() => {
-            this.renderer = new Renderer(this.app);
-            this.renderer.setMenu(MenuType.MAIN);
             this.app.ticker.add((delta) => {
                 this.renderer.update(delta);
             });
@@ -37,6 +39,8 @@ export default class Main {
     }
 
     private loadTextures(): void {
+        this.loader.defaultQueryString = "v="+ Utils.getRandom(1000000, 9999999);
+
         // Fonts
         this.loader.add("Minecraft AE", MinecraftAEFont);
     }

@@ -5,5 +5,5 @@ import "./style/style.css";
 new Main(new PIXI.Application({
     antialias: true,
     autoDensity: true,
-    resolution: 2,
+    resolution: 3,
 }));

@@ -17,7 +17,9 @@ export interface LabelOption extends ComponentOption {
 
 export interface ButtonStyle {
     backgroundColor: number
+    borderColor?: number
     hoverBackgroundColor?: number
+    hoverBorderColor?: number
 }
 
 export interface ButtonOption extends ComponentOption {
@@ -27,4 +29,8 @@ export interface ButtonOption extends ComponentOption {
     textStyle: TextStyleType
     style?: ButtonStyle
     onClick?: (e: PIXI.FederatedPointerEvent) => any
+}
+
+export interface RawSave {
+    
 }
