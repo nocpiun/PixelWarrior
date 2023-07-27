@@ -2,7 +2,7 @@ import Menu from "./Menu";
 
 import Label from "../components/Label";
 import PageContainer from "../components/PageContainer";
-import Background from "../components/Background";
+import { MenuBackground } from "../components/Background";
 
 import Renderer from "../Renderer";
 import { MenuType } from "../../types";
@@ -20,7 +20,8 @@ export default class SettingsMenu extends Menu {
     }
 
     public init(): void {
-        this.addChild(Background(0x3d3d3d));
+        // this.addChild(Background(0x3d3d3d));
+        this.addChild(MenuBackground());
 
         // Page Container
         this.addChild(PageContainer());

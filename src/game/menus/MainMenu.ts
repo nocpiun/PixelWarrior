@@ -6,7 +6,7 @@ import Game from "../Game";
 
 import Label from "../components/Label";
 import Button from "../components/Button";
-import Background from "../components/Background";
+import { MenuBackground } from "../components/Background";
 
 import Renderer from "../Renderer";
 import { MenuType } from "../../types";
@@ -26,7 +26,9 @@ export default class MainMenu extends Menu {
     }
 
     public init(): void {
-        this.addChild(Background(0x3d3d3d));
+        // this.addChild(Background(0x3d3d3d));
+        // Background
+        this.addChild(MenuBackground());
 
         // Title
         this.title = new Label("Pixel Warrior", {

@@ -45,7 +45,10 @@ module.exports = {
         new CleanWebpackPlugin(),
         new CopyWebpackPlugin({
             patterns: [
-                { from: path.join(__dirname, "public"), to: path.join(__dirname, "build") }
+                // HTML file
+                { from: path.join(__dirname, "public"), to: path.join(__dirname, "build") },
+                // Assets
+                { from: path.join(__dirname, "src/assets"), to: path.join(__dirname, "build/assets") },
             ]
         })
     ],
