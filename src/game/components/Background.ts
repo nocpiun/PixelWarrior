@@ -13,7 +13,7 @@ export function MenuBackground(): PIXI.TilingSprite {
     
     // filter
     var backgroundFilter = new PIXI.ColorMatrixFilter();
-    backgroundFilter.brightness(0.6, true);
+    backgroundFilter.brightness(0.4, true);
     background.filters = [backgroundFilter];
 
     return background;

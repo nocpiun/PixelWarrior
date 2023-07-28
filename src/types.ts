@@ -1,4 +1,5 @@
 import * as PIXI from "pixijs";
+import type { ListItem } from "./game/components/List";
 
 type TextStyleType = Partial<PIXI.ITextStyle> | PIXI.TextStyle;
 
@@ -31,6 +32,27 @@ export interface ButtonOption extends ComponentOption {
     onClick?: (e: PIXI.FederatedPointerEvent) => any
 }
 
+export interface ListStyle {
+    borderColor?: number
+}
+
+export interface ListOption extends ComponentOption {
+    width: number
+    height: number
+    list: ListItem[]
+    style?: ListStyle
+}
+
+export interface ListItemOption extends ComponentOption {
+    width: number
+    height: number
+    text: string
+    details: string
+    style?: ButtonStyle
+    onClick?: (e: PIXI.FederatedPointerEvent) => any
+}
+
 export interface RawSave {
-    
+    id: number
+    time: number
 }

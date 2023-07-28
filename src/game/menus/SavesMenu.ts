@@ -1,12 +1,16 @@
 import Menu from "./Menu";
+import Game from "../Game";
 
 import Label from "../components/Label";
+import List, { ListItem } from "../components/List";
 import PageContainer from "../components/PageContainer";
 import { MenuBackground } from "../components/Background";
 
 import Renderer from "../Renderer";
+import Save from "../Save";
 import { MenuType } from "../../types";
 import { gameFont } from "../style";
+import Utils from "../../utils/Utils";
 
 export default class SavesMenu extends Menu {
     private renderer: Renderer;
@@ -20,14 +24,16 @@ export default class SavesMenu extends Menu {
     }
 
     public init(): void {
-        // this.addChild(Background(0x3d3d3d));
+        var saves = Save.getSaves();
+
         this.addChild(MenuBackground());
 
         // Page Container
-        this.addChild(PageContainer());
+        var page = PageContainer();
+        this.addChild(page);
 
         // Title
-        var title = new Label("存档列表 (0)", {
+        var title = new Label("存档列表 ("+ saves.length +")", {
             x: 0,
             y: 50,
             style: {
@@ -38,6 +44,46 @@ export default class SavesMenu extends Menu {
         });
         title.textObject.position._x = window.innerWidth / 2 - title.textObject.width / 2;
         title.appendTo(this);
+        
+        // Content
+        const listMargin = 350;
+        const listItemWidth = page.width - 2 * listMargin;
+        const listItemHeight = 70;
+        var list = new List({
+            x: 0,
+            y: 100,
+            width: listItemWidth,
+            height: 700,
+            style: {
+                borderColor: 0x636363
+            },
+            list: []
+        });
+        list.position._x = window.innerWidth / 2 - page.width / 2 + listMargin;
+        list.appendTo(this);
+        for(let i = 0; i < saves.length; i++) {
+            var item = new ListItem({
+                x: 0,
+                y: 100,
+                width: listItemWidth,
+                height: listItemHeight,
+                text: "存档 - "+ saves[i].id,
+                details: Utils.timeToString(saves[i].time),
+                style: {
+                    backgroundColor: 0x333333,
+                    borderColor: 0x636363,
+                    hoverBackgroundColor: 0x222222,
+                    hoverBorderColor: 0x43c91a
+                },
+                onClick: () => {
+                    var save = Save.from(saves[i]);
+                    // Launch the game with the specified save
+                    this.renderer.setMenu(MenuType.INGAME, new Game(save));
+                }
+            });
+            item.position._y = i * (listItemHeight + 2);
+            list.addItem(item);
+        }
     }
 
     private initListeners(): void {

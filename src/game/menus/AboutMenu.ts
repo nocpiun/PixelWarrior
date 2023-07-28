@@ -23,7 +23,6 @@ export default class AboutMenu extends Menu {
     }
 
     public init(): void {
-        // this.addChild(Background(0x3d3d3d));
         this.addChild(MenuBackground());
 
         // Page Container

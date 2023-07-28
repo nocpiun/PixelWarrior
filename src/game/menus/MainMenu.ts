@@ -26,8 +26,6 @@ export default class MainMenu extends Menu {
     }
 
     public init(): void {
-        // this.addChild(Background(0x3d3d3d));
-        // Background
         this.addChild(MenuBackground());
 
         // Title
