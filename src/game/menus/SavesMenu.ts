@@ -9,7 +9,7 @@ import { MenuBackground } from "../components/Background";
 import Renderer from "../Renderer";
 import Save from "../Save";
 import { MenuType } from "../../types";
-import { gameFont } from "../style";
+import { gameFont, CommonButtonStyle } from "../style";
 import Utils from "../../utils/Utils";
 
 export default class SavesMenu extends Menu {
@@ -69,16 +69,11 @@ export default class SavesMenu extends Menu {
                 height: listItemHeight,
                 text: "存档 - "+ saves[i].id,
                 details: Utils.timeToString(saves[i].time),
-                style: {
-                    backgroundColor: 0x333333,
-                    borderColor: 0x636363,
-                    hoverBackgroundColor: 0x222222,
-                    hoverBorderColor: 0x43c91a
-                },
+                style: CommonButtonStyle,
                 onClick: () => {
                     var save = Save.from(saves[i]);
                     // Launch the game with the specified save
-                    this.renderer.setMenu(MenuType.INGAME, new Game(save));
+                    this.renderer.setMenu(MenuType.INGAME, new Game(this.renderer, save));
                 }
             });
             item.position._y = i * (listItemHeight + 2);

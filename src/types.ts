@@ -56,3 +56,22 @@ export interface RawSave {
     id: number
     time: number
 }
+
+export enum Skin {
+    TEO, KAYCE
+}
+
+export enum Towards {
+    LEFT, RIGHT
+}
+
+export enum EntityAnimation {
+    STANDING_LEFT,
+    STANDING_RIGHT,
+    WALKING_LEFT,
+    WALKING_RIGHT,
+    SKILL1,
+    SKILL2,
+    ACTIVATED,
+    ANGRY
+}

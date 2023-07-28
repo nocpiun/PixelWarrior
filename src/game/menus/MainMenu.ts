@@ -11,7 +11,11 @@ import { MenuBackground } from "../components/Background";
 import Renderer from "../Renderer";
 import { MenuType } from "../../types";
 import type { ButtonStyle } from "../../types";
-import { gameFont, ButtonTextStyle } from "../style";
+import {
+    gameFont,
+    CommonButtonStyle,
+    ButtonTextStyle
+} from "../style";
 
 export default class MainMenu extends Menu {
     private renderer: Renderer;
@@ -61,12 +65,6 @@ export default class MainMenu extends Menu {
         const buttonHeight = 50;
         const buttonMargin = 15;
         const buttonTop = 150;
-        const buttonStyle: ButtonStyle = {
-            backgroundColor: 0x333333,
-            borderColor: 0x636363,
-            hoverBackgroundColor: 0x222222,
-            hoverBorderColor: 0x43c91a
-        };
 
         var newGameButton = new Button({
             text: "新游戏",
@@ -75,13 +73,13 @@ export default class MainMenu extends Menu {
             height: buttonHeight,
             x: 0,
             y: 240,
-            style: buttonStyle,
+            style: CommonButtonStyle,
             onClick: () => {
                 // Create a new save
                 var save = Save.create();
 
                 // Create a game object and then launch the InGameMenu by it
-                this.renderer.setMenu(MenuType.INGAME, new Game(save));
+                this.renderer.setMenu(MenuType.INGAME, new Game(this.renderer, save));
             }
         });
         newGameButton.position._x = this.title.textObject.position._x + this.title.textObject.width / 2 - newGameButton.background.width / 2;
@@ -95,7 +93,7 @@ export default class MainMenu extends Menu {
             height: buttonHeight,
             x: 0,
             y: 240,
-            style: buttonStyle,
+            style: CommonButtonStyle,
             onClick: () => {
                 this.renderer.setMenu(MenuType.SAVES);
             }
@@ -111,7 +109,7 @@ export default class MainMenu extends Menu {
             height: buttonHeight,
             x: 0,
             y: 240,
-            style: buttonStyle,
+            style: CommonButtonStyle,
             onClick: () => {
                 this.renderer.setMenu(MenuType.SETTINGS);
             }
@@ -127,7 +125,7 @@ export default class MainMenu extends Menu {
             height: buttonHeight,
             x: 0,
             y: 240,
-            style: buttonStyle,
+            style: CommonButtonStyle,
             onClick: () => {
                 this.renderer.setMenu(MenuType.ABOUT);
             }

@@ -10,9 +10,12 @@ export default class InGameMenu extends Menu {
 
     public init(game: Game): void {
         this.game = game;
+
+        // Game GUI
+        /** @todo */
     }
 
-    public update(): void {
-        
+    public update(delta: number): void {
+        this.game.update(delta, this);
     }
 }
