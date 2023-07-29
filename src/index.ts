@@ -6,4 +6,5 @@ new Main(new PIXI.Application({
     antialias: true,
     autoDensity: true,
     resolution: 3,
+    resizeTo: window
 }));
