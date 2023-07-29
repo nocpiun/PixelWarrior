@@ -20,7 +20,7 @@ export default class KeyBind {
         document.addEventListener("keypress", (e) => {
             if(this.pressed) return;
 
-            if(e.key.indexOf(key) > -1) this.pressed = true;
+            if(e.key.toLowerCase() === key) this.pressed = true;
         });
 
         document.addEventListener("keyup", () => {
