@@ -10,6 +10,7 @@ export default function Background(color: number, alpha?: number): PIXI.Graphics
 export function MenuBackground(): PIXI.TilingSprite {
     var backgroundTile = PIXI.Texture.from("/assets/textures/background/1.png");
     var background = new PIXI.TilingSprite(backgroundTile, window.innerWidth, window.innerHeight);
+    background.tileScale.set(1.5, 1.5);
     
     // filter
     var backgroundFilter = new PIXI.ColorMatrixFilter();

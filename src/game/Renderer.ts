@@ -31,7 +31,7 @@ export default class Renderer {
             new SavesMenu(this), // 2
             new SettingsMenu(this), // 3
             new AboutMenu(this), // 4
-            new InGameMenu(), // 5
+            new InGameMenu(this), // 5
         ];
 
         this.initObjects();

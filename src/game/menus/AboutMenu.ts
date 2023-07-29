@@ -18,7 +18,6 @@ export default class AboutMenu extends Menu {
         super();
 
         this.renderer = renderer;
-        this.init();
         this.initListeners();
     }
 
@@ -52,6 +51,7 @@ export default class AboutMenu extends Menu {
         this.addChild(aboutItem("Dependencies", "pixi.js  [https://pixijs.com]", itemTop + 4 * itemMargin));
         this.addChild(aboutItem("", "webpack  [https://webpack.js.org]", itemTop + 5 * itemMargin));
         this.addChild(aboutItem("", "typescript  [https://typescriptlang.org]", itemTop + 6 * itemMargin));
+        this.addChild(aboutItem("", "bump.js  [https://github.com/kittykatattack/bump]", itemTop + 7 * itemMargin));
 
         // Footer
         var footer = new Label("感谢游玩 Pixel Warrior!", {

@@ -52,9 +52,16 @@ export interface ListItemOption extends ComponentOption {
     onClick?: (e: PIXI.FederatedPointerEvent) => any
 }
 
+export interface PlayerSave {
+    x: number
+    y: number
+    towards: Towards
+}
+
 export interface RawSave {
     id: number
     time: number
+    player: PlayerSave
 }
 
 export enum Skin {
@@ -66,10 +73,8 @@ export enum Towards {
 }
 
 export enum EntityAnimation {
-    STANDING_LEFT,
-    STANDING_RIGHT,
-    WALKING_LEFT,
-    WALKING_RIGHT,
+    STANDING,
+    WALKING,
     SKILL1,
     SKILL2,
     ACTIVATED,

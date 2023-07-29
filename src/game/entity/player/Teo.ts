@@ -27,7 +27,9 @@ export default class Teo extends Player {
     public constructor(x: number, y: number, towards: Towards) {
         super(x, y, towards);
 
-        this.playAnimation(EntityAnimation.STANDING_RIGHT);
+        this.width = 80;
+        this.height = 176;
+        this.playAnimation(EntityAnimation.STANDING);
     }
 
     public getSkin(): Skin {
@@ -46,18 +48,18 @@ export default class Teo extends Player {
         this.stopAnimation();
 
         switch(animation) {
-            case EntityAnimation.STANDING_LEFT:
-                break;
-            case EntityAnimation.STANDING_RIGHT:
+            case EntityAnimation.STANDING:
                 this.frameList = standingAnimation;
                 break;
-            case EntityAnimation.WALKING_LEFT:
-                break;
-            case EntityAnimation.WALKING_RIGHT:
+            case EntityAnimation.WALKING:
                 this.frameList = walkingAnimation;
                 break;
         }
 
         this.registerAnimationTimer();
+    }
+
+    public update(delta: number): void {
+        super.update(delta);
     }
 }

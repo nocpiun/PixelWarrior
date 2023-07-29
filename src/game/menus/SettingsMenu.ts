@@ -15,7 +15,6 @@ export default class SettingsMenu extends Menu {
         super();
 
         this.renderer = renderer;
-        this.init();
         this.initListeners();
     }
 

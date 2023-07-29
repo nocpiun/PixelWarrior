@@ -26,7 +26,6 @@ export default class MainMenu extends Menu {
         super();
 
         this.renderer = renderer;
-        this.init();
     }
 
     public init(): void {
@@ -42,7 +41,7 @@ export default class MainMenu extends Menu {
                 fontFamily: gameFont
             }
         });
-        this.title.textObject.position.x = window.innerWidth - this.title.textObject.width - 270;
+        this.title.textObject.position.x = window.innerWidth - this.title.textObject.width - .15 * window.innerWidth; // 270
         this.title.textObject.position.y = -this.title.textObject.height;
         this.title.appendTo(this);
 

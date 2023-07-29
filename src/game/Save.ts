@@ -1,21 +1,28 @@
 import Storage from "../utils/Storage";
-import type { RawSave } from "../types";
+import { Towards, RawSave, PlayerSave } from "../types";
 
 export default class Save {
-    private id: number;
-    private time: number;
+    public id: number;
+    public time: number;
+    public player: PlayerSave | null = null;
     
-    private constructor(id: number, time: number) {
-        this.id = id;
-        this.time = time;
-    }
+    public constructor(raw: RawSave) {
+        this.id = raw.id;
+        this.time = raw.time;
 
-    public static from(raw: RawSave): Save {
-        return new Save(raw.id, raw.time);
+        this.player = raw.player ?? {
+            x: 10,
+            y: 30,
+            towards: Towards.RIGHT
+        };
     }
 
     public static create(): Save {
-        var newSave = new Save(Save.getSaves().length + 1, new Date().getTime());
+        var newSave = new Save({
+            id: Save.getSaves().length + 1,
+            time: new Date().getTime(),
+            player: null
+        });
         Storage.get().setItem<RawSave[]>("pw.saves", [...Save.getSaves(), newSave.toRaw()]);
         
         return newSave;
@@ -25,10 +32,24 @@ export default class Save {
         return Storage.get().getItem<RawSave[]>("pw.saves", []);
     }
 
+    public saveToLocal(): void {
+        var saves = Save.getSaves();
+
+        for(let i = 0; i < saves.length; i++) {
+            if(saves[i].id === this.id) {
+                saves[i] = this.toRaw();
+                break;
+            }
+        }
+
+        Storage.get().setItem<RawSave[]>("pw.saves", saves);
+    }
+
     public toRaw(): RawSave {
         return {
             id: this.id,
-            time: this.time
+            time: this.time,
+            player: this.player
         };
     }
 }

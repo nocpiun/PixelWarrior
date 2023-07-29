@@ -46,7 +46,7 @@ export default class SavesMenu extends Menu {
         title.appendTo(this);
         
         // Content
-        const listMargin = 350;
+        const listMargin = .23 * page.width;
         const listItemWidth = page.width - 2 * listMargin;
         const listItemHeight = 70;
         var list = new List({
@@ -71,7 +71,7 @@ export default class SavesMenu extends Menu {
                 details: Utils.timeToString(saves[i].time),
                 style: CommonButtonStyle,
                 onClick: () => {
-                    var save = Save.from(saves[i]);
+                    var save = new Save(saves[i]);
                     // Launch the game with the specified save
                     this.renderer.setMenu(MenuType.INGAME, new Game(this.renderer, save));
                 }
