@@ -24,6 +24,6 @@ export default class Utils {
     }
 
     public static containInScreen(sprite: PIXI.Sprite): Set<"left" | "right" | "top" | "bottom"> {
-        return new Bump(PIXI).contain(sprite, { x: 0, y: 0, width: window.innerWidth, height: window.innerHeight }, false);
+        return new Bump(PIXI).contain(sprite, { x: -Infinity, y: 0, width: Infinity, height: window.innerHeight }, false);
     }
 }

@@ -18,6 +18,7 @@ export default abstract class Player extends Entity {
 
     public jump(): void {
         this.isJumping = true;
+        this.haveGravity = false;
         this.speed = Math.sqrt(2 * g * maxJumpingHeight);
     }
 
@@ -27,25 +28,6 @@ export default abstract class Player extends Entity {
 
     public update(delta: number): void {
         super.update(delta);
-
-        // Gravity
-        var collision = Utils.containInScreen(this);
-        if(
-            !this.isJumping &&
-            (
-                !collision ||
-                (collision && !collision.has("bottom"))
-            )
-        ) {
-            this.speed += g * delta;
-
-            const dy = this.speed * delta + g * Math.pow(delta, 2) / 2;
-
-            // To prevent the player sprite being "stuck" in the ground
-            this.y + dy > window.innerHeight - this.height
-            ? this.y = window.innerHeight - this.height
-            : this.y += dy;
-        }
 
         // Jumping
         if(this.isJumping) {
@@ -57,6 +39,7 @@ export default abstract class Player extends Entity {
 
             if(this.speed <= 0) {
                 this.isJumping = false;
+                this.haveGravity = true;
                 this.jumpingHeight = 0;
                 this.speed = 0;
             }

@@ -1,12 +1,15 @@
 import * as PIXI from "pixijs";
 
+import Utils from "../../utils/Utils";
 import { Towards, EntityAnimation } from "../../types";
+import { g } from "../../global";
 
 export default abstract class Entity extends PIXI.Sprite {
     protected static delta: number = 200; // ms
 
     private _towards: Towards;
     private isWalking: boolean = false;
+    public haveGravity: boolean = true;
 
     // Timers
     protected animation: NodeJS.Timer | null;
@@ -77,6 +80,25 @@ export default abstract class Entity extends PIXI.Sprite {
     }
 
     public update(delta: number) {
+        // Gravity
+        var collision = Utils.containInScreen(this);
+        if(
+            this.haveGravity &&
+            (
+                !collision ||
+                (collision && !collision.has("bottom"))
+            )
+        ) {
+            this.speed += g * delta;
+
+            const dy = this.speed * delta + g * Math.pow(delta, 2) / 2;
+
+            // To prevent the player sprite being "stuck" in the ground
+            this.y + dy > window.innerHeight - this.height
+            ? this.y = window.innerHeight - this.height
+            : this.y += dy;
+        }
+
         // Walking
         if(this.isWalking) {
             switch(this.towards) {
