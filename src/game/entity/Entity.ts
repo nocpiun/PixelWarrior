@@ -1,5 +1,7 @@
 import * as PIXI from "pixijs";
 
+import Player from "./player/Player";
+
 import Utils from "../../utils/Utils";
 import { Towards, EntityAnimation } from "../../types";
 import { g } from "../../global";
@@ -94,9 +96,13 @@ export default abstract class Entity extends PIXI.Sprite {
             const dy = this.speed * delta + g * Math.pow(delta, 2) / 2;
 
             // To prevent the player sprite being "stuck" in the ground
-            this.y + dy > window.innerHeight - this.height
-            ? this.y = window.innerHeight - this.height
-            : this.y += dy;
+            if(this.y + dy > window.innerHeight - this.height) {
+                this.y = window.innerHeight - this.height;
+                
+                if(this instanceof Player) this.canJump = true;
+            } else {
+                this.y += dy;
+            }
         }
 
         // Walking

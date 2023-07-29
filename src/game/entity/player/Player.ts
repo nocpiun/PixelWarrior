@@ -10,13 +10,24 @@ export default abstract class Player extends Entity {
     public isUsingSkill: boolean = false;
     
     public isJumping: boolean = false;
+    public canJump: boolean = true;
     private jumpingHeight: number = 0;
+    private jumpingTimes: number = 0; // <= 2
 
     public constructor(x: number, y: number, towards: Towards) {
         super(x, y, towards);
     }
 
     public jump(): void {
+        if(!this.canJump) return;
+
+        this.jumpingTimes++;
+        if(this.jumpingTimes > 2) {
+            this.jumpingTimes = 0;
+            this.canJump = false;
+            return;
+        }
+
         this.isJumping = true;
         this.haveGravity = false;
         this.speed = Math.sqrt(2 * g * maxJumpingHeight);
