@@ -8,7 +8,19 @@ export default class Utils {
 
     public static timeToString(time: number): string {
         var date = new Date(time);
-        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+        return `${
+            date.getFullYear()
+        }-${
+            date.getMonth() + 1
+        }-${
+            date.getDate()
+        }-${
+            date.getHours() < 10 ? "0"+ date.getHours() : date.getHours()
+        }:${
+            date.getMinutes() < 10 ? "0"+ date.getMinutes() : date.getMinutes()
+        }:${
+            date.getSeconds() < 10 ? "0"+ date.getSeconds() : date.getSeconds()
+        }`;
     }
 
     public static containInScreen(sprite: PIXI.Sprite): Set<"left" | "right" | "top" | "bottom"> {

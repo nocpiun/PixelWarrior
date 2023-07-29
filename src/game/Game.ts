@@ -52,6 +52,7 @@ export default class Game {
 
     public saveProgress(): void {
         // Update Save object
+        this.save.time = new Date().getTime();
         this.save.player = {
             x: this.player.x,
             y: this.player.y,
