@@ -12,7 +12,7 @@ export default abstract class Player extends Entity {
     public isJumping: boolean = false;
     public canJump: boolean = true;
     private jumpingHeight: number = 0;
-    private jumpingTimes: number = 0; // <= 2
+    public jumpingTimes: number = 0; // <= 2
 
     public constructor(x: number, y: number, towards: Towards) {
         super(x, y, towards);

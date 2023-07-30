@@ -36,14 +36,9 @@ export default class Game {
 
     private initListeners(): void {
         // Bind keys
-        KeyBind.create("a", () => this.player.walk(Towards.LEFT));
-        KeyBind.create("d", () => this.player.walk(Towards.RIGHT));
+        KeyBind.create("a", () => this.player.walk(Towards.LEFT), () => this.player.stopWalking());
+        KeyBind.create("d", () => this.player.walk(Towards.RIGHT), () => this.player.stopWalking());
         KeyBind.create(" ", () => this.player.jump());
-        
-        document.addEventListener("keyup", () => {
-            this.player.stopWalking();
-            this.player.playAnimation(EntityAnimation.STANDING);
-        });
 
         window.addEventListener("beforeunload", () => {
             this.saveProgress();

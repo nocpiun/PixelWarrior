@@ -8,13 +8,13 @@ export default class KeyBind {
     public key: string;
     public listener: Listener;
 
-    private constructor(key: string, listener: Listener) {
+    private constructor(key: string, keypressListener: Listener, keyupListener?: Listener) {
         this.key = key;
         this.listener = () => {
             if(!this.canCallListener) return;
             this.canCallListener = false;
 
-            listener();
+            keypressListener();
         };
 
         document.addEventListener("keypress", (e) => {
@@ -23,14 +23,17 @@ export default class KeyBind {
             if(e.key.toLowerCase() === key) this.pressed = true;
         });
 
-        document.addEventListener("keyup", () => {
+        document.addEventListener("keyup", (e) => {
+            if(e.key.toLowerCase() !== key) return;
+
+            if(keyupListener) keyupListener();
             this.canCallListener = true;
             this.pressed = false;
         });
     }
 
-    public static create(key: string, listener: Listener): KeyBind {
-        var instance = new KeyBind(key, listener);
+    public static create(key: string, keypressListener: Listener, keyupListener?: Listener): KeyBind {
+        var instance = new KeyBind(key, keypressListener, keyupListener);
         KeyBind.bindList.push(instance);
         return instance;
     }

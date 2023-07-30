@@ -39,6 +39,7 @@ export default abstract class Entity extends PIXI.Sprite {
 
     public stopWalking(): void {
         this.isWalking = false;
+        this.playAnimation(EntityAnimation.STANDING);
     }
 
     public abstract playAnimation(animation: EntityAnimation): void;
@@ -99,7 +100,10 @@ export default abstract class Entity extends PIXI.Sprite {
             if(this.y + dy > window.innerHeight - this.height) {
                 this.y = window.innerHeight - this.height;
                 
-                if(this instanceof Player) this.canJump = true;
+                if(this instanceof Player) {
+                    this.canJump = true;
+                    this.jumpingTimes = 0;
+                }
             } else {
                 this.y += dy;
             }
@@ -109,10 +113,10 @@ export default abstract class Entity extends PIXI.Sprite {
         if(this.isWalking) {
             switch(this.towards) {
                 case Towards.LEFT:
-                    this.x -= 3;
+                    this.x -= 5;
                     break;
                 case Towards.RIGHT:
-                    this.x += 3;
+                    this.x += 5;
                     break;
             }
         }
