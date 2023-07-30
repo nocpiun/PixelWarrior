@@ -173,10 +173,10 @@ export default class Main {
     }
 
     private createTextureTask(cb: () => Promise<any>) {
-        this.texturePromises.push(cb().then(() => {
+        this.texturePromises.push(cb().then((res) => {
             this.loadingProgress++;
             // Update progressbar
-            this.renderer.setMenu(MenuType.LOADING, this.loadingProgress / this.texturePromises.length);
+            this.renderer.setMenu(MenuType.LOADING, this.loadingProgress / this.texturePromises.length, res.textureCacheIds[0]);
         }));
     }
 }

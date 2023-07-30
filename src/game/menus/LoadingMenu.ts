@@ -15,7 +15,7 @@ export default class LoadingMenu extends Menu {
         this.renderer = renderer;
     }
 
-    public init(progress: number): void {
+    public init(progress: number, currentResource: string): void {
         var gameTitle = new Label("Pixel Warrior", {
             x: 0,
             y: 0,
@@ -30,12 +30,12 @@ export default class LoadingMenu extends Menu {
         gameTitle.textObject.position.y = window.innerHeight / 2 - gameTitle.textObject.height / 2;
         gameTitle.appendTo(this);
 
-        var loadingLabel = new Label("Loading...", {
+        var loadingLabel = new Label("Loading: "+ currentResource, {
             x: 0,
             y: 0,
             style: {
                 fill: 0xffffff,
-                fontSize: 25,
+                fontSize: 19,
                 fontFamily: "Consolas",
                 align: "center"
             }
