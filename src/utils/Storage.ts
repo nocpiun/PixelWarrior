@@ -15,6 +15,8 @@ export default class Storage {
     public getItem<T>(key: string, defaultValue?: T): T {
         var item = this.localStorage.getItem(key);
         if(!item) {
+            if(!defaultValue) return null;
+            
             this.setItem(key, defaultValue);
             return defaultValue;
         }

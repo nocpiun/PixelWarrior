@@ -44,9 +44,9 @@ export default class AboutMenu extends Menu {
         const itemMargin = 24; // item height included
 
         // About Items
-        this.addChild(aboutItem("Description", "PixelWarrior is a rogue game.", itemTop));
-        this.addChild(aboutItem("Author", "NoahHrreion", itemTop + itemMargin));
-        this.addChild(aboutItem("Version", version, itemTop + 2 * itemMargin));
+        this.addChild(aboutItem("Version", version, itemTop));
+        this.addChild(aboutItem("Developer", "NoahHrreion", itemTop + itemMargin));
+        this.addChild(aboutItem("Texture Creator", "Ironrock", itemTop + 2 * itemMargin));
         this.addChild(aboutItem("Github Repo", "https://github.com/nocpiun/PixelWarrior", itemTop + 3 * itemMargin));
         this.addChild(aboutItem("Dependencies", "pixi.js  [https://pixijs.com]", itemTop + 4 * itemMargin));
         this.addChild(aboutItem("", "webpack  [https://webpack.js.org]", itemTop + 5 * itemMargin));

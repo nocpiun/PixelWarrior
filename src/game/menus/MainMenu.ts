@@ -1,21 +1,19 @@
-import * as PIXI from "pixijs";
-
 import Menu from "./Menu";
 import Save from "../Save";
 import Game from "../Game";
+import Renderer from "../Renderer";
 
 import Label from "../components/Label";
 import Button from "../components/Button";
 import { MenuBackground } from "../components/Background";
 
-import Renderer from "../Renderer";
 import { MenuType } from "../../types";
-import type { ButtonStyle } from "../../types";
 import {
     gameFont,
     CommonButtonStyle,
     ButtonTextStyle
 } from "../style";
+import Storage from "../../utils/Storage";
 
 export default class MainMenu extends Menu {
     private renderer: Renderer;
@@ -44,6 +42,20 @@ export default class MainMenu extends Menu {
         this.title.textObject.position.x = window.innerWidth - this.title.textObject.width - .15 * window.innerWidth; // 270
         this.title.textObject.position.y = -this.title.textObject.height;
         this.title.appendTo(this);
+
+        // Welcome Text
+        const playerName = Storage.get().getItem("pw.name");
+        var welcome = new Label("你好，玩家 "+ playerName +" !", {
+            x: 0,
+            y: 190,
+            style: {
+                fill: 0xdddddd,
+                fontSize: 25,
+                fontFamily: gameFont
+            }
+        });
+        welcome.textObject.position.x = this.title.textObject.position.x + this.title.textObject.width / 2 - welcome.textObject.width / 2;
+        welcome.appendTo(this);
 
         // Copyright
         var copyright = new Label("Copyright (c) NoahHrreion "+ new Date().getFullYear(), {

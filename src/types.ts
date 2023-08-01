@@ -4,7 +4,7 @@ import type { ListItem } from "./game/components/List";
 type TextStyleType = Partial<PIXI.ITextStyle> | PIXI.TextStyle;
 
 export enum MenuType {
-    LOADING, MAIN, SAVES, SETTINGS, ABOUT, INGAME
+    LOADING, MAIN, SAVES, SETTINGS, ABOUT, INGAME, LOGIN
 }
 
 export interface ComponentOption {
@@ -50,6 +50,11 @@ export interface ListItemOption extends ComponentOption {
     details: string
     style?: ButtonStyle
     onClick?: (e: PIXI.FederatedPointerEvent) => any
+}
+
+export interface InputOption extends ComponentOption {
+    width: number
+    height: number
 }
 
 export interface PlayerSave {

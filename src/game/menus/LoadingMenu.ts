@@ -1,9 +1,10 @@
 import * as PIXI from "pixijs";
 
+import Renderer from "../Renderer";
 import Menu from "./Menu";
 import Label from "../components/Label";
 
-import Renderer from "../Renderer";
+import Storage from "../../utils/Storage";
 import { MenuType } from "../../types";
 
 export default class LoadingMenu extends Menu {
@@ -70,6 +71,10 @@ export default class LoadingMenu extends Menu {
 
     // `update()` will be called when all of the resources are loaded
     public update(): void {
-        this.renderer.setMenu(MenuType.MAIN);
+        if(Storage.get().getItem("pw.name")) {
+            this.renderer.setMenu(MenuType.MAIN);
+        } else {
+            this.renderer.setMenu(MenuType.LOGIN);
+        }
     }
 }

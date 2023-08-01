@@ -17,7 +17,7 @@ export default abstract class Player extends Entity {
     public health: number = 200;
 
     public readonly maxDefense: number = 10;
-    public defense: number = 7;
+    public defense: number = 0;
 
     public constructor(x: number, y: number, towards: Towards) {
         super(x, y, towards);

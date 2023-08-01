@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@pixi/loaders": "^6.5.9",
+    "events": "^3.3.0",
     "pixijs": "^7.1.4"
   }
 }

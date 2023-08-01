@@ -27,7 +27,7 @@ export default class Main {
         document.body.appendChild(this.app.view as HTMLCanvasElement);
 
         // Prevent rightclick contextmenu
-        // (this.app.view as HTMLCanvasElement).addEventListener("contextmenu", (e) => e.preventDefault());
+        (this.app.view as HTMLCanvasElement).addEventListener("contextmenu", (e) => e.preventDefault());
 
         this.renderer = new Renderer(this.app);
         

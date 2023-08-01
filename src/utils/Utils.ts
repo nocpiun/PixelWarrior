@@ -2,6 +2,8 @@ import * as PIXI from "pixijs";
 import Bump from "../lib/bump.js";
 
 export default class Utils {
+    private static currentId: number = 0;
+
     public static getRandom(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
@@ -35,5 +37,10 @@ export default class Utils {
                 cb(...args);
             }, delay);
         };
+    }
+
+    public static getId(): number {
+        Utils.currentId++;
+        return Utils.currentId;
     }
 }

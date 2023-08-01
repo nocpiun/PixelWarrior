@@ -7,6 +7,7 @@ import SavesMenu from "./menus/SavesMenu";
 import SettingsMenu from "./menus/SettingsMenu";
 import AboutMenu from "./menus/AboutMenu";
 import InGameMenu from "./menus/InGameMenu";
+import LoginMenu from "./menus/LoginMenu";
 
 import Label from "./components/Label";
 import Button from "./components/Button";
@@ -32,6 +33,7 @@ export default class Renderer {
             new SettingsMenu(this), // 3
             new AboutMenu(this), // 4
             new InGameMenu(this), // 5
+            new LoginMenu(this), // 6
         ];
 
         this.initObjects();

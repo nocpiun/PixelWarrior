@@ -35,6 +35,7 @@ export default class SavesMenu extends Menu {
         super();
 
         this.renderer = renderer;
+        this.interactive = true;
         this.initListeners();
     }
 
@@ -83,7 +84,7 @@ export default class SavesMenu extends Menu {
             }
         });
 
-        document.addEventListener("wheel", Utils.throttle((e) => {
+        this.on("wheel", Utils.throttle((e) => {
             if(e.deltaY > 0 && this.displayedBeginIndex < Save.getSaves().length - 9) this.displayedBeginIndex += 9;
             if(e.deltaY < 0 && this.displayedBeginIndex > 0) this.displayedBeginIndex -= 9;
 
