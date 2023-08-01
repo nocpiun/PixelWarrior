@@ -41,6 +41,19 @@ export default class LoginMenu extends Menu {
         title.position.x = window.innerWidth / 2 - title.textObject.width / 2;
         title.appendTo(this);
 
+        // Notes
+        var notes = new Label("仅允许大小写英文字母、数字、下划线和连词符", {
+            x: 0,
+            y: 300,
+            style: {
+                fill: 0xcccccc,
+                fontSize: 16,
+                fontFamily: gameFont
+            }
+        });
+        notes.position.x = window.innerWidth / 2 - notes.textObject.width / 2;
+        notes.appendTo(this);
+
         // Input Box
         var inputBox = new Input({
             x: 0,
@@ -61,6 +74,8 @@ export default class LoginMenu extends Menu {
             y: 270,
             style: CommonButtonStyle,
             onClick: () => {
+                if(inputBox.value === "") return;
+
                 Storage.get().setItem("pw.name", inputBox.value);
                 this.renderer.setMenu(MenuType.MAIN);
             }

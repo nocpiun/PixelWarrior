@@ -49,7 +49,7 @@ export default class MainMenu extends Menu {
             x: 0,
             y: 190,
             style: {
-                fill: 0xdddddd,
+                fill: 0xfaf211,
                 fontSize: 25,
                 fontFamily: gameFont
             }
@@ -144,6 +144,26 @@ export default class MainMenu extends Menu {
         aboutButton.position._x = this.title.textObject.position._x + this.title.textObject.width / 2 - aboutButton.background.width / 2;
         aboutButton.position._y = buttonTop + 3 * (buttonHeight + buttonMargin);
         aboutButton.appendTo(this);
+
+        // Change Name Button
+        var changeNameButton = new Button({
+            text: "修改名称",
+            textStyle: {
+                fill: 0xeeeeee,
+                fontSize: 17,
+                fontFamily: gameFont,
+            },
+            width: 110,
+            height: 35,
+            x: 25,
+            y: 0,
+            style: CommonButtonStyle,
+            onClick: () => {
+                this.renderer.setMenu(MenuType.LOGIN);
+            }
+        });
+        changeNameButton.position._y = copyright.textObject.position._y - changeNameButton.textObject.height - 45;
+        changeNameButton.appendTo(this);
     }
 
     public update(delta: number): void {

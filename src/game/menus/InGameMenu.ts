@@ -98,7 +98,7 @@ function bar(
         y: 0,
         style: {
             fill: 0xffffff,
-            fontSize: 18,
+            fontSize: 16,
             fontFamily: gameFont
         }
     });
@@ -107,7 +107,7 @@ function bar(
     barLabel.appendTo(container);
 
     var barBorder = new PIXI.Graphics();
-    barBorder.lineStyle(5, 0xffffff);
+    barBorder.lineStyle(4, 0xffffff);
     barBorder.drawRect(x + barLabel.textObject.width + 15, y, width, height);
     container.addChild(barBorder);
 
@@ -126,7 +126,7 @@ function bar(
         y: 0,
         style: {
             fill: 0xffffff,
-            fontSize: 18,
+            fontSize: 16,
             fontFamily: gameFont
         }
     });

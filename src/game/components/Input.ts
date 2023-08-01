@@ -89,7 +89,7 @@ export default class Input extends Component<InputOption> {
             y: 0,
             style: {
                 fill: 0xffffff,
-                fontSize: 15,
+                fontSize: 16,
                 fontFamily: gameFont,
             }
         });
@@ -103,7 +103,7 @@ export default class Input extends Component<InputOption> {
             y: 0,
             style: {
                 fill: 0xffffff,
-                fontSize: 15,
+                fontSize: 16,
                 fontFamily: gameFont,
             }
         });
@@ -120,6 +120,7 @@ export default class Input extends Component<InputOption> {
 
     public focus(): void {
         this.isFocused = true;
+        this.cursorObject.visible = true;
         Emitter.get().emit("input-focus", this.id);
 
         this.setBorderColor(0xffffff);
@@ -150,7 +151,7 @@ export default class Input extends Component<InputOption> {
     }
 
     public setBorderColor(color: number): void {
-        this.background.lineStyle(3, color);
+        this.background.lineStyle(4, color);
         this.background.drawRect(this.option.x, this.option.y, this.option.width, this.option.height);
     }
 
