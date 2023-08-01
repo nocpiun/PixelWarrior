@@ -6,7 +6,8 @@ import Settings from "./Settings";
 import Player from "./entity/player/Player";
 import Teo from "./entity/player/Teo";
 import Kayce from "./entity/player/Kayce";
-import InGameMenu from "./menus/InGameMenu";
+
+import Background from "./components/Background";
 
 import KeyBind from "../utils/KeyBind";
 import { EntityAnimation, Skin, Towards } from "../types";
@@ -68,6 +69,10 @@ export default class Game {
         });
 
         frame.removeChildren();
+
+        // dev
+        // background
+        frame.addChild(Background(0x631e1e));
 
         // Render Player
         frame.addChild(this.player);

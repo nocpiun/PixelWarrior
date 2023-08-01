@@ -29,56 +29,39 @@ export default class InGameMenu extends Menu {
 
         var player = this.game.player;
 
+        const barMargin = 30;
+
         // HP Bar
         const hpbarWidth = 450;
         const hpbarHeight = 25;
-        const hpbarMargin = 30;
-        const hpbarPadding = 5;
-        var hpbarBorder = new PIXI.Graphics();
-        hpbarBorder.lineStyle(5, 0xffffff);
-        hpbarBorder.drawRect(
-            window.innerWidth - hpbarWidth - hpbarMargin,
-            hpbarMargin,
+        this.addChild(bar(
+            window.innerWidth - hpbarWidth - barMargin,
+            barMargin,
             hpbarWidth,
-            hpbarHeight
-        );
-        this.addChild(hpbarBorder);
-
-        var hpbar = new PIXI.Graphics();
-        hpbar.beginFill(0xf01f1f);
-        hpbar.drawRect(
-            window.innerWidth - hpbarWidth - hpbarMargin + hpbarPadding,
-            hpbarMargin + hpbarPadding,
-            (hpbarWidth - 2 * hpbarPadding) * (player.health / player.maxHealth),
-            hpbarHeight - 2 * hpbarPadding
-        );
-        this.addChild(hpbar);
-
-        var hpLabel = new Label("HP: ", {
-            x: 0,
-            y: 0,
-            style: {
-                fill: 0xffffff,
-                fontSize: 18,
-                fontFamily: gameFont
+            hpbarHeight,
+            {
+                label: "HP: ",
+                value: player.health,
+                maxValue: player.maxHealth,
+                background: 0xf01f1f
             }
-        });
-        hpLabel.position.x = window.innerWidth - hpbarWidth - hpbarMargin - 15 - hpLabel.textObject.width;
-        hpLabel.position.y = hpbarMargin + hpbarPadding;
-        hpLabel.appendTo(this);
-        
-        var hpValue = new Label(player.health +"/"+ player.maxHealth, {
-            x: 0,
-            y: 0,
-            style: {
-                fill: 0x111111,
-                fontSize: 18,
-                fontFamily: gameFont
+        ));
+
+        // Defense Bar
+        const defensebarWidth = 450;
+        const defensebarHeight = 25;
+        this.addChild(bar(
+            window.innerWidth - defensebarWidth - barMargin,
+            hpbarHeight + barMargin * 2,
+            defensebarWidth,
+            defensebarHeight,
+            {
+                label: "防御: ",
+                value: player.defense,
+                maxValue: player.maxDefense,
+                background: 0xbbbbbb
             }
-        });
-        hpValue.position.x = window.innerWidth - hpbarWidth - hpbarMargin + hpbarWidth / 2 - hpValue.textObject.width / 2;
-        hpValue.position.y = hpbarMargin + hpbarPadding;
-        hpValue.appendTo(this);
+        ));
     }
 
     private initListeners(): void {
@@ -93,4 +76,62 @@ export default class InGameMenu extends Menu {
     public update(delta: number): void {
         this.game.update(delta, this.gameFrame);
     }
+}
+
+function bar(
+    x: number,
+    y: number,
+    width: number,
+    height: number, 
+    option: {
+        label: string,
+        value: number,
+        maxValue: number,
+        background: number
+    }): PIXI.Container {
+    var container = new PIXI.Container();
+
+    const padding = 5;
+    var barBorder = new PIXI.Graphics();
+    barBorder.lineStyle(5, 0xffffff);
+    barBorder.drawRect(x, y, width, height);
+    container.addChild(barBorder);
+
+    var bar = new PIXI.Graphics();
+    bar.beginFill(option.background);
+    bar.drawRect(
+        x + padding,
+        y + padding,
+        (width - 2 * padding) * (option.value / option.maxValue),
+        height - 2 * padding
+    );
+    container.addChild(bar);
+
+    var barLabel = new Label(option.label, {
+        x: 0,
+        y: 0,
+        style: {
+            fill: 0xffffff,
+            fontSize: 18,
+            fontFamily: gameFont
+        }
+    });
+    barLabel.position.x = x - 15 - barLabel.textObject.width;
+    barLabel.position.y = y + padding;
+    barLabel.appendTo(container);
+
+    var barValue = new Label(option.value +"/"+ option.maxValue, {
+        x: 0,
+        y: 0,
+        style: {
+            fill: 0xffffff,
+            fontSize: 18,
+            fontFamily: gameFont
+        }
+    });
+    barValue.position.x = x + width / 2 - barValue.textObject.width / 2;
+    barValue.position.y = y + padding;
+    barValue.appendTo(container);
+
+    return container;
 }
