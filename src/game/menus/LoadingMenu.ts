@@ -68,6 +68,7 @@ export default class LoadingMenu extends Menu {
         this.addChild(progressbar);
     }
 
+    // `update()` will be called when all of the resources are loaded
     public update(): void {
         this.renderer.setMenu(MenuType.MAIN);
     }

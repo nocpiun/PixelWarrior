@@ -28,6 +28,13 @@ export default class List extends Component<ListOption> {
         this.option.list.push(item);
         item.appendTo(this);
     }
+
+    public clearItem(): void {
+        this.option.list.forEach((item) => {
+            this.removeChild(item);
+        });
+        this.option.list = [];
+    }
 }
 
 export class ListItem extends Component<ListItemOption> {
@@ -64,7 +71,7 @@ export class ListItem extends Component<ListItemOption> {
 
         this.textObject = new PIXI.Text(option.text, {
             fill: 0xeeeeee,
-            fontSize: 17,
+            fontSize: 18,
             fontFamily: gameFont,
         });
         this.textObject.x = option.x + 10;

@@ -2,11 +2,10 @@ import Entity from "../Entity";
 
 import { g } from "../../../global";
 import type { Skin, Towards } from "../../../types";
-import Utils from "../../../utils/Utils";
-
-const maxJumpingHeight = 240;
 
 export default abstract class Player extends Entity {
+    private static readonly maxJumpingHeight: number = 240;
+
     public isUsingSkill: boolean = false;
     
     public isJumping: boolean = false;
@@ -30,7 +29,7 @@ export default abstract class Player extends Entity {
 
         this.isJumping = true;
         this.haveGravity = false;
-        this.speed = Math.sqrt(2 * g * maxJumpingHeight);
+        this.speed = Math.sqrt(2 * g * Player.maxJumpingHeight);
     }
 
     public abstract getSkin(): Skin;

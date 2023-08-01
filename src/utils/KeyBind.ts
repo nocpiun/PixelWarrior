@@ -30,6 +30,11 @@ export default class KeyBind {
             this.canCallListener = true;
             this.pressed = false;
         });
+
+        window.addEventListener("beforeunload", () => {
+            this.canCallListener = true;
+            this.pressed = false;
+        });
     }
 
     public static create(key: string, keypressListener: Listener, keyupListener?: Listener): KeyBind {

@@ -26,4 +26,14 @@ export default class Utils {
     public static containInScreen(sprite: PIXI.Sprite): Set<"left" | "right" | "top" | "bottom"> {
         return new Bump(PIXI).contain(sprite, { x: -Infinity, y: 0, width: Infinity, height: window.innerHeight }, false);
     }
+
+    public static throttle(cb: (...args: any[]) => void, delay: number): (...args: any[]) => void {
+        var timer = null;
+        return (...args: any[]) => {
+            if(timer) clearTimeout(timer);
+            timer = setTimeout(() => {
+                cb(...args);
+            }, delay);
+        };
+    }
 }

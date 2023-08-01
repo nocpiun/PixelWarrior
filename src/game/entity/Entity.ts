@@ -7,7 +7,7 @@ import { Towards, EntityAnimation } from "../../types";
 import { g } from "../../global";
 
 export default abstract class Entity extends PIXI.Sprite {
-    protected static delta: number = 200; // ms
+    protected static readonly delta: number = 200; // ms
 
     private _towards: Towards;
     private isWalking: boolean = false;
