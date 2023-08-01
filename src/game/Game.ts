@@ -1,3 +1,5 @@
+import * as PIXI from "pixijs";
+
 import Renderer from "./Renderer";
 import Save from "./Save";
 import Settings from "./Settings";
@@ -13,7 +15,7 @@ export default class Game {
     private renderer: Renderer;
     private save: Save;
 
-    private player: Player;
+    public player: Player;
 
     public constructor(renderer: Renderer, save: Save) {
         this.renderer = renderer;
@@ -40,9 +42,11 @@ export default class Game {
         KeyBind.create("d", () => this.player.walk(Towards.RIGHT), () => this.player.stopWalking());
         KeyBind.create(" ", () => this.player.jump());
 
-        window.addEventListener("beforeunload", () => {
-            this.saveProgress();
-        });
+        window.addEventListener("beforeunload", () => this.saveProgress());
+        window.addEventListener("unload", () => this.saveProgress());
+
+        document.addEventListener("visibilitychange", () => this.player.stopWalking());
+        window.addEventListener("popstate", () => this.player.stopWalking());
     }
 
     public saveProgress(): void {
@@ -57,16 +61,16 @@ export default class Game {
         this.save.saveToLocal();
     }
 
-    public update(delta: number, menu: InGameMenu): void {
+    public update(delta: number, frame: PIXI.Container): void {
         // Emit Listeners
         KeyBind.bindList.forEach((handler) => {
             if(handler.pressed) handler.listener();
         });
 
-        menu.removeChildren();
+        frame.removeChildren();
 
         // Render Player
-        menu.addChild(this.player);
+        frame.addChild(this.player);
         this.player.update(delta);
     }
 }

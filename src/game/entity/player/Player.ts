@@ -13,6 +13,9 @@ export default abstract class Player extends Entity {
     private jumpingHeight: number = 0;
     public jumpingTimes: number = 0; // <= 2
 
+    public maxHealth: number = 200;
+    public health: number = 200;
+
     public constructor(x: number, y: number, towards: Towards) {
         super(x, y, towards);
     }
