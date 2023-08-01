@@ -8,9 +8,12 @@ import Teo from "./entity/player/Teo";
 import Kayce from "./entity/player/Kayce";
 
 import Background from "./components/Background";
+import Label from "./components/Label";
 
 import KeyBind from "../utils/KeyBind";
-import { EntityAnimation, Skin, Towards } from "../types";
+import Storage from "../utils/Storage";
+import { gameFont } from "./style";
+import { Skin, Towards } from "../types";
 
 export default class Game {
     private renderer: Renderer;
@@ -77,5 +80,20 @@ export default class Game {
         // Render Player
         frame.addChild(this.player);
         this.player.update(delta);
+
+        // Player Name
+        const playerName = Storage.get().getItem<string>("pw.name");
+        var nameText = new Label(playerName, {
+            x: 0,
+            y: 0,
+            style: {
+                fill: 0xeeeeee,
+                fontSize: 16,
+                fontFamily: gameFont
+            }
+        });
+        nameText.textObject.position.x = this.player.x + this.player.width / 2 - nameText.textObject.width / 2;
+        nameText.textObject.position.y = this.player.y - 25;
+        nameText.appendTo(frame);
     }
 }

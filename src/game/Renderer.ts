@@ -44,13 +44,14 @@ export default class Renderer {
 
         // FPS Text
         this.fpsText = new Label("", {
-            x: 15,
+            x: 0,
             y: 15,
             style: {
                 fill: 0xffffff,
                 fontSize: 16,
             }
         });
+        this.fpsText.position.x = window.innerWidth - 15 - this.fpsText.textObject.width;
         this.fpsText.appendTo(this.app.stage);
     }
 
@@ -75,5 +76,6 @@ export default class Renderer {
     public update(delta: number): void {
         this.menus[this.currentMenu].update(delta);
         this.fpsText.setText(`FPS: ${this.app.ticker.FPS.toFixed(1)} / ${this.app.ticker.maxFPS.toFixed(1)}`);
+        this.fpsText.position.x = window.innerWidth - 15 - this.fpsText.textObject.width;
     }
 }

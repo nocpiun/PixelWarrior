@@ -44,7 +44,7 @@ export default class MainMenu extends Menu {
         this.title.appendTo(this);
 
         // Welcome Text
-        const playerName = Storage.get().getItem("pw.name");
+        const playerName = Storage.get().getItem<string>("pw.name");
         var welcome = new Label("你好，玩家 "+ playerName +" !", {
             x: 0,
             y: 190,
