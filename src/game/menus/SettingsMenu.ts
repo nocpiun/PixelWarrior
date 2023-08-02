@@ -30,7 +30,7 @@ export default class SettingsMenu extends Menu {
             y: 50,
             style: {
                 fill: 0xffffff,
-                fontSize: 30,
+                fontSize: 32,
                 fontFamily: gameFont
             }
         });

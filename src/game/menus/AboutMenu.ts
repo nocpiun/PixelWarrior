@@ -33,7 +33,7 @@ export default class AboutMenu extends Menu {
             y: 50,
             style: {
                 fill: 0xffffff,
-                fontSize: 30,
+                fontSize: 32,
                 fontFamily: gameFont
             }
         });
@@ -59,7 +59,7 @@ export default class AboutMenu extends Menu {
             y: 0,
             style: {
                 fill: 0xfaf211,
-                fontSize: 25,
+                fontSize: 32,
                 fontFamily: gameFont
             }
         });

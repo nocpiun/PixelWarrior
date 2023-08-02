@@ -156,6 +156,11 @@ export default class Input extends Component<InputOption> {
     }
 
     private refreshCursorPosition(): void {
+        if(this.value.length === 0) {
+            this.cursorObject.textObject.position.x = this.text.textObject.position.x;
+            return;
+        }
+
         this.cursorObject.textObject.position.x = this.text.textObject.position.x + this.text.textObject.width;
     }
 }
