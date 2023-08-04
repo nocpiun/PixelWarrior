@@ -19,10 +19,13 @@ import Storage from "../../utils/Storage";
 export default class LoginMenu extends Menu {
     private renderer: Renderer;
 
+    private inputBox: Input;
+
     public constructor(renderer: Renderer) {
         super();
 
         this.renderer = renderer;
+        this.initListeners();
     }
 
     public init(): void {
@@ -55,14 +58,15 @@ export default class LoginMenu extends Menu {
         notes.appendTo(this);
 
         // Input Box
-        var inputBox = new Input({
+        this.inputBox = new Input({
             x: 0,
             y: 240,
             width: 370,
-            height: 40
+            height: 40,
+            defaultValue: Storage.get().getItem("pw.name") ?? undefined
         });
-        inputBox.position.x = window.innerWidth / 2 - inputBox.background.width / 2;
-        inputBox.appendTo(this);
+        this.inputBox.position.x = window.innerWidth / 2 - this.inputBox.background.width / 2;
+        this.inputBox.appendTo(this);
         
         // Login Button
         var loginButton = new Button({
@@ -73,15 +77,27 @@ export default class LoginMenu extends Menu {
             x: 0,
             y: 270,
             style: CommonButtonStyle,
-            onClick: () => {
-                if(inputBox.value === "") return;
-
-                Storage.get().setItem("pw.name", inputBox.value);
-                this.renderer.setMenu(MenuType.MAIN);
-            }
+            onClick: () => this.login()
         });
         loginButton.position.x = window.innerWidth / 2 - loginButton.background.width / 2;
         loginButton.appendTo(this);
+
+        this.inputBox.focus();
+    }
+
+    private initListeners(): void {
+        document.addEventListener("keydown", (e) => {
+            if(e.key === "Enter" && this.renderer.currentMenu === MenuType.LOGIN) {
+                this.login();
+            }
+        });
+    }
+
+    private login(): void {
+        if(this.inputBox.value === "") return;
+
+        Storage.get().setItem("pw.name", this.inputBox.value);
+        this.renderer.setMenu(MenuType.MAIN);
     }
 
     public update(): void {

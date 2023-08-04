@@ -67,7 +67,7 @@ export default class MainMenu extends Menu {
                 fontFamily: gameFont,
                 align: "left"
             }
-        });
+        }, "By NoahHrreion");
         copyright.textObject.position.y = window.innerHeight - copyright.textObject.height - 30;
         copyright.appendTo(this);
 

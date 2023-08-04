@@ -116,6 +116,7 @@ export default class Input extends Component<InputOption> {
         }, 500);
 
         this.refreshCursorPosition();
+        if(this.option.defaultValue) this.value = this.option.defaultValue;
     }
 
     public focus(): void {

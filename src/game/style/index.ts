@@ -16,7 +16,7 @@ export const ButtonTextStyle = new TextStyle({
     fontFamily: gameFont,
 });
 
-export const AboutItemTextStyle = new TextStyle({
+export const PlainTextStyle = new TextStyle({
     fill: 0xffffff,
     fontSize: 16,
     fontFamily: gameFont

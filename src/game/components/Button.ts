@@ -36,8 +36,7 @@ export default class Button extends Component<ButtonOption> {
         this.addChild(this.background);
 
         this.textObject = new PIXI.Text(option.text, option.textStyle);
-        this.textObject.x = option.x + (option.width / 2) - (this.textObject.width / 2);
-        this.textObject.y = option.y + (option.height / 2) - (this.textObject.height / 2);
+        this.updateTextPosition();
         this.addChild(this.textObject);
     }
 
@@ -53,5 +52,10 @@ export default class Button extends Component<ButtonOption> {
 
     public setText(text: string): void {
         this.textObject.text = text;
+    }
+
+    public updateTextPosition(): void {
+        this.textObject.x = this.option.x + (this.option.width / 2) - (this.textObject.width / 2);
+        this.textObject.y = this.option.y + (this.option.height / 2) - (this.textObject.height / 2);
     }
 }

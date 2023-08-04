@@ -12,6 +12,11 @@ export interface ComponentOption {
     y?: number
 }
 
+export interface ComponentOptionWH extends ComponentOption {
+    width: number
+    height: number
+}
+
 export interface LabelOption extends ComponentOption {
     style?: TextStyleType
 }
@@ -23,9 +28,7 @@ export interface ButtonStyle {
     hoverBorderColor?: number
 }
 
-export interface ButtonOption extends ComponentOption {
-    width: number
-    height: number
+export interface ButtonOption extends ComponentOptionWH {
     text: string
     textStyle: TextStyleType
     style?: ButtonStyle
@@ -36,25 +39,28 @@ export interface ListStyle {
     borderColor?: number
 }
 
-export interface ListOption extends ComponentOption {
-    width: number
-    height: number
+export interface ListOption extends ComponentOptionWH {
     list: ListItem[]
     style?: ListStyle
 }
 
-export interface ListItemOption extends ComponentOption {
-    width: number
-    height: number
+export interface ListItemOption extends ComponentOptionWH {
     text: string
     details: string
     style?: ButtonStyle
     onClick?: (e: PIXI.FederatedPointerEvent) => any
 }
 
-export interface InputOption extends ComponentOption {
-    width: number
-    height: number
+export interface InputOption extends ComponentOptionWH {
+    defaultValue?: string
+}
+
+export interface SwitcherOption extends ComponentOptionWH {
+    textStyle: TextStyleType
+    style?: ButtonStyle
+    values: string[]
+    defaultIndex: number
+    onChange?: (value: string) => any
 }
 
 export interface PlayerSave {
@@ -70,7 +76,7 @@ export interface RawSave {
 }
 
 export enum Skin {
-    TEO, KAYCE
+    TEO = "Teo", KAYCE = "Kayce"
 }
 
 export enum Towards {

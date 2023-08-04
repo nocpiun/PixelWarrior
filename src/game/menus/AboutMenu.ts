@@ -8,7 +8,7 @@ import { MenuBackground } from "../components/Background";
 
 import Renderer from "../Renderer";
 import { MenuType } from "../../types";
-import { gameFont, AboutItemTextStyle } from "../style";
+import { gameFont, PlainTextStyle } from "../style";
 import { version } from "../../global";
 
 export default class AboutMenu extends Menu {
@@ -81,8 +81,8 @@ export default class AboutMenu extends Menu {
     }
 }
 
-function aboutItem(name: string, content: string, y: number): PIXI.Graphics {
-    var item = new PIXI.Graphics();
+function aboutItem(name: string, content: string, y: number): PIXI.Container {
+    var item = new PIXI.Container();
 
     const center = window.innerWidth / 2 - 55;
     const spaceBetween = 300;
@@ -90,7 +90,7 @@ function aboutItem(name: string, content: string, y: number): PIXI.Graphics {
     var nameLabel = new Label(name + (name.length > 0 ? ":" : ""), {
         x: 0,
         y,
-        style: AboutItemTextStyle
+        style: PlainTextStyle
     });
     nameLabel.textObject.position.x = center - spaceBetween / 2 - nameLabel.textObject.width;
     nameLabel.appendTo(item);
@@ -98,7 +98,7 @@ function aboutItem(name: string, content: string, y: number): PIXI.Graphics {
     var contentLabel = new Label(content, {
         x: 0,
         y,
-        style: AboutItemTextStyle
+        style: PlainTextStyle
     });
     contentLabel.textObject.position.x = center + spaceBetween / 2;
     contentLabel.appendTo(item);

@@ -43,4 +43,14 @@ export default class Utils {
         Utils.currentId++;
         return Utils.currentId;
     }
+
+    public static mapToArray<K, V>(map: Map<K, V>): [K, V][] {
+        var result: [K, V][] = [];
+
+        map.forEach((value, key) => {
+            result.push([key, value]);
+        });
+
+        return result;
+    }
 }

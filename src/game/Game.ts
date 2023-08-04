@@ -30,7 +30,7 @@ export default class Game {
     }
 
     private init(): void {
-        switch(Settings.get().getValue<Skin>("skin")) {
+        switch(Settings.get().getValue<Skin>("player.skin")) {
             case Skin.TEO:
                 this.player = new Teo(this.save.player.x, this.save.player.y, this.save.player.towards);
                 break;
