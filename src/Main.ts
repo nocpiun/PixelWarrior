@@ -5,7 +5,7 @@ import Renderer from "./game/Renderer";
 import { MenuType } from "./types";
 import Utils from "./utils/Utils";
 
-import MinecraftAEFont from "./assets/fonts/Minecraft AE.woff";
+import MinecraftAEFont from "../assets/fonts/Minecraft AE.woff";
 
 export default class Main {
     private app: PIXI.Application;

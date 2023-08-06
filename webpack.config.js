@@ -48,7 +48,7 @@ module.exports = {
                 // HTML file
                 { from: path.join(__dirname, "public"), to: path.join(__dirname, "build") },
                 // Assets
-                { from: path.join(__dirname, "src/assets"), to: path.join(__dirname, "build/assets") },
+                { from: path.join(__dirname, "assets"), to: path.join(__dirname, "build/assets") },
             ]
         })
     ],
