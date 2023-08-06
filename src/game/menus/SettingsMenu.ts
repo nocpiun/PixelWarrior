@@ -55,11 +55,7 @@ export default class SettingsMenu extends Menu {
             y: 50,
             width: componentWidth,
             height: componentHeight,
-            textStyle: {
-                fill: 0xeeeeee,
-                fontSize: 16,
-                fontFamily: gameFont,
-            },
+            textStyle: PlainTextStyle,
             style: CommonButtonStyle,
             values: skinList,
             defaultIndex: skinList.indexOf(Settings.get().getValue("player.skin")),

@@ -22,11 +22,11 @@ export default class Label extends Component<LabelOption> {
         this.textObject.on("mouseenter", (e) => {
             if(!tooltip) return;
             this.tooltipObject.visible = true;
-            this.updateTooltipObject(e.client.x - this.position.x, e.client.y - this.position.y);
+            this.updateTooltipObject(e.client.x - this.position.x + 15, e.client.y - this.position.y - 20);
         });
         this.textObject.on("mousemove", (e) => {
             if(!tooltip) return;
-            this.updateTooltipObject(e.client.x - this.position.x, e.client.y - this.position.y);
+            this.updateTooltipObject(e.client.x - this.position.x + 15, e.client.y - this.position.y - 20);
         });
         this.textObject.on("mouseleave", () => {
             if(!tooltip) return;
@@ -41,7 +41,7 @@ export default class Label extends Component<LabelOption> {
             this.addChild(this.tooltipObject);
     
             this.tooltipLabel = new PIXI.Text(tooltip, {
-                fill: 0x9e9e9e,
+                fill: 0xdddddd,
                 fontSize: 16,
                 fontFamily: gameFont
             });

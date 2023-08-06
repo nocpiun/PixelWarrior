@@ -44,11 +44,11 @@ export default class AboutMenu extends Menu {
         const itemMargin = 24; // item height included
 
         // About Items
-        this.addChild(aboutItem("Version", version, itemTop));
-        this.addChild(aboutItem("Developer", "NoahHrreion", itemTop + itemMargin));
-        this.addChild(aboutItem("Texture Creator", "Ironrock", itemTop + 2 * itemMargin));
-        this.addChild(aboutItem("Github Repo", "https://github.com/nocpiun/PixelWarrior", itemTop + 3 * itemMargin));
-        this.addChild(aboutItem("Dependencies", "pixi.js  [https://pixijs.com]", itemTop + 4 * itemMargin));
+        this.addChild(aboutItem("版本", version, itemTop));
+        this.addChild(aboutItem("开发者", "NoahHrreion", itemTop + itemMargin));
+        this.addChild(aboutItem("贴图画师", "Ironrock", itemTop + 2 * itemMargin));
+        this.addChild(aboutItem("Github Repo", "https://github.com/nocpiun/PixelWarrior", itemTop + 3 * itemMargin, "欢迎star本项目"));
+        this.addChild(aboutItem("依赖", "pixi.js  [https://pixijs.com]", itemTop + 4 * itemMargin));
         this.addChild(aboutItem("", "webpack  [https://webpack.js.org]", itemTop + 5 * itemMargin));
         this.addChild(aboutItem("", "typescript  [https://typescriptlang.org]", itemTop + 6 * itemMargin));
         this.addChild(aboutItem("", "bump.js  [https://github.com/kittykatattack/bump]", itemTop + 7 * itemMargin));
@@ -81,7 +81,7 @@ export default class AboutMenu extends Menu {
     }
 }
 
-function aboutItem(name: string, content: string, y: number): PIXI.Container {
+function aboutItem(name: string, content: string, y: number, tooltip?: string): PIXI.Container {
     var item = new PIXI.Container();
 
     const center = window.innerWidth / 2 - 55;
@@ -99,7 +99,7 @@ function aboutItem(name: string, content: string, y: number): PIXI.Container {
         x: 0,
         y,
         style: PlainTextStyle
-    });
+    }, tooltip);
     contentLabel.textObject.position.x = center + spaceBetween / 2;
     contentLabel.appendTo(item);
 
